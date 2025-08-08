@@ -74,7 +74,6 @@ const FilterPanel = ({
       title="Filter Options"
     >
       <div className={styles['filter-content']}>
-        {/* Date Range */}
         <div className={styles['filter-grid']}>
           <Input
             type="month"
@@ -90,7 +89,6 @@ const FilterPanel = ({
           />
         </div>
 
-        {/* Location */}
         <div className={styles['filter-section']}>
           <Input
             type="text"
@@ -101,7 +99,6 @@ const FilterPanel = ({
           />
         </div>
 
-        {/* Search Type */}
         <div className={styles['filter-section']}>
           <Select
             multiple
@@ -118,7 +115,6 @@ const FilterPanel = ({
           />
         </div>
 
-        {/* Action Buttons */}
         <div className={styles['filter-actions']}>
           <Button onClick={handleApplyFilters}>
             Apply Filters

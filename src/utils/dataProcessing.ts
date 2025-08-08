@@ -11,7 +11,6 @@ export const filterData = (data: StopSearchRecord[], filters: FilterOptions): St
   return data.filter(record => {
     const recordDate = parseISO(record.datetime);
     
-    // Date range filter
     if (filters.dateRange.start && filters.dateRange.end) {
       const startDate = startOfDay(filters.dateRange.start);
       const endDate = endOfDay(filters.dateRange.end);
@@ -21,7 +20,6 @@ export const filterData = (data: StopSearchRecord[], filters: FilterOptions): St
       }
     }
     
-    // Location filter
     if (filters.location.length > 0) {
       const searchLocation = filters.location[0].toLowerCase().trim();
       const recordLocation = record.location?.street?.name?.toLowerCase() || '';
@@ -31,7 +29,6 @@ export const filterData = (data: StopSearchRecord[], filters: FilterOptions): St
       }
     }
     
-    // Search type filter
     if (filters.searchType.length > 0 && !filters.searchType.includes(record.type)) {
       return false;
     }
@@ -73,19 +70,16 @@ export const generateOutcomeChartData = (data: StopSearchRecord[]): ChartData =>
 };
 
 export const generateMonthlyTrendChartData = (data: StopSearchRecord[]): ChartData => {
-  // Get all unique months from the data
   const monthlyCounts = data.reduce((acc, record) => {
     const month = format(parseISO(record.datetime), 'yyyy-MM');
     acc[month] = (acc[month] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
-  // Find the date range
   const allDates = data.map(record => parseISO(record.datetime));
   const minDate = new Date(Math.min(...allDates.map(d => d.getTime())));
   const maxDate = new Date(Math.max(...allDates.map(d => d.getTime())));
 
-  // Generate all months in the range
   const allMonths: string[] = [];
   const currentDate = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
   
@@ -95,7 +89,6 @@ export const generateMonthlyTrendChartData = (data: StopSearchRecord[]): ChartDa
     currentDate.setMonth(currentDate.getMonth() + 1);
   }
 
-  // Fill in data for all months (0 for months without data)
   const completeData = allMonths.map(month => monthlyCounts[month] || 0);
   
   return {

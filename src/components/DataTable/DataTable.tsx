@@ -34,7 +34,6 @@ const DataTable = ({ data, pagination, onPageChange }: DataTableProps) => {
     const aValue = a[sortField];
     const bValue = b[sortField];
     
-    // Handle null values
     if (aValue === null && bValue === null) return 0;
     if (aValue === null) return 1;
     if (bValue === null) return -1;
@@ -48,21 +47,17 @@ const DataTable = ({ data, pagination, onPageChange }: DataTableProps) => {
 
   const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
 
-  // Calculate the range of pages to display
   const getPageRange = () => {
     const maxVisiblePages = 5;
     const currentPage = pagination.currentPage;
     
     if (totalPages <= maxVisiblePages) {
-      // If total pages is less than or equal to max visible, show all pages
       return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
     
-    // Calculate start and end of the visible range
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     let endPage = startPage + maxVisiblePages - 1;
     
-    // Adjust if we're near the end
     if (endPage > totalPages) {
       endPage = totalPages;
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -175,7 +170,6 @@ const DataTable = ({ data, pagination, onPageChange }: DataTableProps) => {
         </table>
       </div>
 
-      {/* Pagination */}
       <div className={styles['pagination']}>
         <div className={styles['pagination-info']} id="pagination-info">
           <p>
@@ -205,7 +199,6 @@ const DataTable = ({ data, pagination, onPageChange }: DataTableProps) => {
             <span className="sr-only">Previous page</span>
           </Button>
           
-          {/* Show first page and ellipsis if needed */}
           {pageRange[0] > 1 && (
             <>
               <Button
@@ -223,7 +216,6 @@ const DataTable = ({ data, pagination, onPageChange }: DataTableProps) => {
             </>
           )}
           
-          {/* Show page range */}
           {pageRange.map((page) => (
             <Button
               key={page}
@@ -239,7 +231,6 @@ const DataTable = ({ data, pagination, onPageChange }: DataTableProps) => {
             </Button>
           ))}
           
-          {/* Show last page and ellipsis if needed */}
           {pageRange[pageRange.length - 1] < totalPages && (
             <>
               {pageRange[pageRange.length - 1] < totalPages - 1 && (

@@ -21,7 +21,6 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
-  // Get all focusable elements within the modal
   const getFocusableElements = useCallback(() => {
     if (!modalRef.current) return [];
     
@@ -43,7 +42,6 @@ const Modal = ({
     });
   }, []);
 
-  // Handle Tab key navigation
   const handleTabKey = useCallback((event: KeyboardEvent) => {
     if (!modalRef.current) return;
 
@@ -54,13 +52,11 @@ const Modal = ({
     const lastElement = focusableElements[focusableElements.length - 1];
 
     if (event.shiftKey) {
-      // Shift + Tab: move backwards
       if (document.activeElement === firstElement) {
         event.preventDefault();
         lastElement.focus();
       }
     } else {
-      // Tab: move forwards
       if (document.activeElement === lastElement) {
         event.preventDefault();
         firstElement.focus();
@@ -68,19 +64,15 @@ const Modal = ({
     }
   }, [getFocusableElements]);
 
-  // Focus management
   useEffect(() => {
     if (isOpen) {
-      // Store the currently focused element
       previousActiveElement.current = document.activeElement as HTMLElement;
       
-      // Focus the first focusable element in the modal
       const focusableElements = getFocusableElements();
       if (focusableElements.length > 0) {
         focusableElements[0].focus();
       }
     } else {
-      // Restore focus to the previous element when modal closes
       if (previousActiveElement.current) {
         previousActiveElement.current.focus();
       }

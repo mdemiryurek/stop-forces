@@ -1,8 +1,8 @@
 import { StopSearchRecord, ApiResponse, AvailableDatesResponse } from "@/types";
 import { convertApiRecord, delay } from "./helpers";
 
-const BASE_URL = "/api/stops-force"; // Use our Next.js proxy route
-const FORCE = "metropolitan"; // Metropolitan Police Service
+const BASE_URL = "/api/stops-force";
+const FORCE = "metropolitan";
 
 export const generateDateRange = async (): Promise<string[]> => {
   try {
@@ -13,7 +13,6 @@ export const generateDateRange = async (): Promise<string[]> => {
       return [];
     }
     
-    // Get only the last 12 months of available dates
     const last12Months = availableDates.dates.slice(0, 12);
     
     return last12Months;
@@ -39,20 +38,17 @@ export const fetchStopSearchData = async (
 
     if (!response.ok) {
       const errorText = await response.text();
-      // Don't throw error, just log and return empty array
       console.warn(`Police API error for ${date}: ${response.status} - ${errorText}`);
       return [];
     }
 
     const data = await response.json();
 
-    // Validate data structure
     if (!Array.isArray(data)) {
       console.warn(`Police API returned invalid data format for ${date}: expected array, got ${typeof data}`);
       return [];
     }
 
-    // Clean and validate each record - be more lenient with missing fields
     const filteredData = data.filter((record: unknown) => {
       return (
         record &&
@@ -60,11 +56,9 @@ export const fetchStopSearchData = async (
         record !== null &&
         "datetime" in record &&
         "outcome" in record
-        // Don't require location, ageRange, or other fields as they might be missing
       );
     });
 
-    // Convert API records to our StopSearchRecord format
     const convertedData = filteredData.map(convertApiRecord);
 
     return convertedData;
@@ -87,7 +81,6 @@ export const fetchAllStopSearchData = async (): Promise<ApiResponse> => {
   }
 
   try {
-    // Fetch data sequentially with delays to avoid rate limiting
     const allData: StopSearchRecord[] = [];
     
     for (let i = 0; i < dates.length; i++) {
@@ -97,13 +90,11 @@ export const fetchAllStopSearchData = async (): Promise<ApiResponse> => {
         const data = await fetchStopSearchData(date);
         allData.push(...data);
         
-        // Add delay between requests (except for the last one)
         if (i < dates.length - 1) {
-          await delay(500); // 500ms delay
+          await delay(500);
         }
       } catch (err) {
         console.error(`Failed to fetch data for ${date}:`, err);
-        // Continue with next date even if one fails
       }
     }
 

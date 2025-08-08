@@ -25,7 +25,6 @@ export const useStopSearchData = () => {
     totalItems: 0,
   });
 
-  // Available filter options
   const availableOptions = useMemo(
     () => ({
       searchTypes: getSearchTypeValues(allData),
@@ -33,7 +32,6 @@ export const useStopSearchData = () => {
     [allData]
   );
 
-  // Fetch data
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -54,7 +52,6 @@ export const useStopSearchData = () => {
     }
   }, []);
 
-  // Apply filters when data or filters change
   const filteredData = useMemo(() => {
     const filtered = filterData(allData, filters);
     setPagination((prev) => ({
@@ -65,7 +62,6 @@ export const useStopSearchData = () => {
     return filtered;
   }, [allData, filters]);
 
-  // Get paginated data
   const paginatedData = useMemo(() => {
     return paginateData(
       filteredData,
@@ -74,7 +70,6 @@ export const useStopSearchData = () => {
     );
   }, [filteredData, pagination.currentPage, pagination.itemsPerPage]);
 
-  // Generate chart data
   const chartData = useMemo(
     () => ({
       outcome: generateOutcomeChartData(filteredData),
@@ -83,7 +78,6 @@ export const useStopSearchData = () => {
     [filteredData]
   );
 
-  // Handlers
   const handlePageChange = useCallback((page: number) => {
     setPagination((prev) => ({ ...prev, currentPage: page }));
   }, []);
@@ -110,13 +104,11 @@ export const useStopSearchData = () => {
     }
   }, []);
 
-  // Initial data fetch
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   return {
-    // State
     isLoading,
     lastUpdated,
     error,
@@ -124,12 +116,10 @@ export const useStopSearchData = () => {
     pagination,
     availableOptions,
     
-    // Data
     filteredData,
     paginatedData,
     chartData,
     
-    // Handlers
     handlePageChange,
     handleItemsPerPageChange,
     handleFiltersChange,

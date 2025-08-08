@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-// Environment variables
 const POLICE_API_BASE_URL = process.env.POLICE_API_BASE_URL;
 const REQUEST_TIMEOUT = 10000;
 
@@ -56,11 +55,10 @@ export async function GET() {
 
     const data: PoliceApiResponse[] = await response.json();
     
-    // Filter for dates where metropolitan is available
     const metropolitanDates = data
       .filter(item => item['stop-and-search'].includes('metropolitan'))
       .map(item => item.date)
-      .sort((a, b) => b.localeCompare(a)); // Sort descending (latest first)
+      .sort((a, b) => b.localeCompare(a));
 
     if (metropolitanDates.length === 0) {
       return NextResponse.json(
@@ -78,7 +76,7 @@ export async function GET() {
 
     return NextResponse.json(result, {
       headers: {
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400', // 1 hour cache
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error) {

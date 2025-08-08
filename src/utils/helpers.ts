@@ -1,16 +1,13 @@
 import { StopSearchRecord } from "@/types";
 
-// Helper function to convert snake_case to camelCase
 export const snakeToCamel = (str: string): string => {
   return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
 };
 
-// Helper function to add delay between requests
 export const delay = (ms: number): Promise<void> => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-// Helper function to convert API response to StopSearchRecord format
 export const convertApiRecord = (record: Record<string, unknown>): StopSearchRecord => {
   const getString = (key: string, fallback: string = 'Not specified'): string => {
     return String(record[key] || record[snakeToCamel(key)] || fallback);

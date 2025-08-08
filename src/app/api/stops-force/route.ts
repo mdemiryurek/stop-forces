@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Environment variables
 const POLICE_API_BASE_URL = process.env.POLICE_API_BASE_URL;
 const REQUEST_TIMEOUT = 10000;
 
 const validateDate = (date: string): boolean => {
-  const dateRegex = /^\d{4}-\d{2}$/; // YYYY-MM format
+  const dateRegex = /^\d{4}-\d{2}$/;
   return dateRegex.test(date);
 };
 
 const validateForce = (force: string): boolean => {
-  return force.length > 0 && force.length <= 50; // Basic validation
+  return force.length > 0 && force.length <= 50;
 };
 
 export async function GET(request: NextRequest) {
@@ -91,7 +90,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(data, {
       headers: {
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400', // 1 hour cache
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     });
   } catch (error) {
