@@ -76,26 +76,14 @@ export const generateMonthlyTrendChartData = (data: StopSearchRecord[]): ChartDa
     return acc;
   }, {} as Record<string, number>);
 
-  const allDates = data.map(record => parseISO(record.datetime));
-  const minDate = new Date(Math.min(...allDates.map(d => d.getTime())));
-  const maxDate = new Date(Math.max(...allDates.map(d => d.getTime())));
-
-  const allMonths: string[] = [];
-  const currentDate = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
-  
-  while (currentDate <= maxDate) {
-    const monthKey = format(currentDate, 'yyyy-MM');
-    allMonths.push(monthKey);
-    currentDate.setMonth(currentDate.getMonth() + 1);
-  }
-
-  const completeData = allMonths.map(month => monthlyCounts[month] || 0);
+  // Only include months that have actual data
+  const monthsWithData = Object.keys(monthlyCounts).sort();
   
   return {
-    labels: allMonths.map(month => format(parseISO(`${month}-01`), 'MMM yyyy')),
+    labels: monthsWithData.map(month => format(parseISO(`${month}-01`), 'MMM yyyy')),
     datasets: [{
       label: 'Searches per Month',
-      data: completeData,
+      data: monthsWithData.map(month => monthlyCounts[month]),
       backgroundColor: ['rgba(59, 130, 246, 0.2)'],
       borderColor: ['#3B82F6'],
       borderWidth: 2
