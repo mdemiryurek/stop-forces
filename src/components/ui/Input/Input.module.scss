@@ -1,0 +1,28 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  
+  .input-label {
+    display: block;
+    font-size: $text-sm;
+    font-weight: 500;
+    color: $text-primary;
+  }
+  
+  .input-field {
+    @include input-base;
+  }
+  
+  .input-error {
+    font-size: $text-sm;
+    color: $text-error;
+    
+    &[role="alert"] {
+      margin-top: $spacing-xs;
+    }
+  }
+} 

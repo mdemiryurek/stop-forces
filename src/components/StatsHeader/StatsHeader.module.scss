@@ -1,0 +1,67 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.stats-container {
+  background: white;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-lg;
+  @include container-base;
+  
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: $spacing-md;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-lg;
+  flex: 1;
+  
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filter-button-container {
+  display: flex;
+  align-items: flex-start;
+  
+  @include mobile {
+    align-self: stretch;
+  }
+}
+
+.stat-card {
+  h3 {
+    color: $text-secondary;
+    font-size: $text-sm;
+    font-weight: 500;
+    margin: 0 0 $spacing-sm 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  p {
+    color: $text-primary;
+    font-size: $text-xl;
+    font-weight: 600;
+    margin: 0;
+    
+    @include mobile {
+      font-size: $text-lg;
+    }
+  }
+}

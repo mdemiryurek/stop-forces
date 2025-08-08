@@ -1,0 +1,94 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: $spacing-md;
+  animation: fadeIn 0.2s ease-out;
+
+  @include mobile {
+    padding: $spacing-sm;
+  }
+}
+
+.modal {
+  background: white;
+  border-radius: $radius-lg;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-height: 90vh;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+
+  @include mobile {
+    max-width: none;
+    max-height: 95vh;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg;
+  border-bottom: 1px solid $border;
+  flex-shrink: 0;
+
+  .title {
+    font-size: $text-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  .closeButton {
+    padding: $spacing-xs;
+    border-radius: $radius-sm;
+    
+    &:hover {
+      background-color: $secondary;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-lg;
+
+  @include mobile {
+    padding: $spacing-md;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

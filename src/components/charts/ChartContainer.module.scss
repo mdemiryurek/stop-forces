@@ -1,0 +1,31 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+@use "sass:color";
+
+.chart-container {
+    @include card;
+
+    .chart-header {
+        margin-bottom: $spacing-md;
+
+        h3 {
+            font-size: $text-lg;
+            font-weight: 600;
+            color: $text-primary;
+            margin-bottom: $spacing-xs;
+        }
+
+        p {
+            font-size: $text-sm;
+            color: $text-secondary;
+        }
+    }
+
+    .chart-content {
+        min-height: 20rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-secondary;
+    }
+}

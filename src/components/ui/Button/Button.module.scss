@@ -1,0 +1,62 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.button {
+  @include button-base;
+  
+  // Size variants
+  &.button-sm {
+    height: 2rem;
+    padding: 0 $spacing-sm;
+    font-size: $text-sm;
+  }
+  
+  &.button-md {
+    height: 2.5rem;
+    padding: 0 $spacing-md;
+  }
+  
+  &.button-lg {
+    height: 3rem;
+    padding: 0 $spacing-lg;
+    font-size: $text-lg;
+  }
+  
+  // Variant styles
+  &.button-primary {
+    background-color: $primary;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: $primary-hover;
+    }
+  }
+  
+  &.button-secondary {
+    background-color: $secondary;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background-color: $secondary-hover;
+    }
+  }
+  
+  &.button-outline {
+    background-color: transparent;
+    border: 1px solid $border;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background-color: $secondary;
+    }
+  }
+  
+  &.button-ghost {
+    background-color: transparent;
+    color: $text-primary;
+    
+    &:hover:not(:disabled) {
+      background-color: $secondary;
+    }
+  }
+} 

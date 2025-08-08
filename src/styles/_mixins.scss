@@ -1,0 +1,100 @@
+@use '_variables' as *;
+
+// Focus styles
+@mixin focus-ring($color: $border-focus) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+// Button base styles
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-md;
+  font-weight: 500;
+  transition: all $transition-normal;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  @include focus-ring;
+}
+
+// Input base styles
+@mixin input-base {
+  display: block;
+  width: 100%;
+  border: 1px solid $border;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+  font-size: $text-sm;
+  background-color: $background;
+  color: $text-primary;
+  
+  &:focus {
+    border-color: $border-focus;
+    outline: none;
+  }
+  
+  &.error {
+    border-color: $text-error;
+  }
+}
+
+// Card styles
+@mixin card {
+  background-color: $background;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+}
+
+// Flex utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+@mixin container-base {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-lg $spacing-md;
+  
+  @include mobile {
+    padding: $spacing-md $spacing-sm;
+  }
+}

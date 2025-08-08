@@ -1,0 +1,149 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use 'sass:color';
+
+.data-table {
+  @include card;
+  padding: 0;
+  
+  .table-container {
+    overflow-x: auto;
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      
+      th {
+        background-color: $secondary;
+        padding: $spacing-md;
+        text-align: left;
+        font-weight: 600;
+        font-size: $text-sm;
+        color: $text-primary;
+        border-bottom: 1px solid $border;
+        cursor: pointer;
+        transition: background-color $transition-normal;
+        
+        &:hover {
+          background-color: color.adjust($secondary, $lightness: -5%);
+        }
+        
+        &:first-child {
+          border-top-left-radius: $radius-md;
+        }
+        
+        &:last-child {
+          border-top-right-radius: $radius-md;
+        }
+        
+        .flex {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+        }
+      }
+      
+      td {
+        padding: $spacing-md;
+        border-bottom: 1px solid $border;
+        color: $text-primary;
+        font-size: $text-sm;
+        
+        &:last-child {
+          border-right: none;
+        }
+        
+        .truncate {
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      
+      tr {
+        &:hover {
+          background-color: $secondary;
+        }
+        
+        &:last-child td {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  
+  .badge {
+    display: inline-flex;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $text-xs;
+    font-weight: 600;
+    border-radius: 9999px;
+    
+    &.badge-red {
+      background-color: #fef2f2;
+      color: #991b1b;
+    }
+    
+    &.badge-yellow {
+      background-color: #fffbeb;
+      color: #92400e;
+    }
+    
+    &.badge-green {
+      background-color: #f0fdf4;
+      color: #166534;
+    }
+    
+    &.badge-gray {
+      background-color: #f9fafb;
+      color: #374151;
+    }
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md;
+    border-top: 1px solid $border;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-sm;
+    }
+    
+    .pagination-info {
+      font-size: $text-sm;
+      color: $text-secondary;
+      
+      .font-medium {
+        font-weight: 500;
+      }
+    }
+    
+    .pagination-controls {
+      display: flex;
+      gap: $spacing-xs;
+      
+      button {
+        @include button-base;
+        padding: $spacing-xs $spacing-sm;
+        font-size: $text-sm;
+        min-width: 2rem;
+        height: 2rem;
+        
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+        
+        &.active {
+          background-color: $primary;
+          color: white;
+        }
+      }
+    }
+  }
+} 

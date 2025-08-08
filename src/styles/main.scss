@@ -1,0 +1,261 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Global CSS Variables (for any components that might need them)
+:root {
+    --background: #{$background};
+    --foreground: #{$foreground};
+    --primary: #{$primary};
+    --primary-hover: #{$primary-hover};
+    --secondary: #{$secondary};
+    --secondary-hover: #{$secondary-hover};
+    --border: #{$border};
+    --border-focus: #{$border-focus};
+    --text-primary: #{$text-primary};
+    --text-secondary: #{$text-secondary};
+    --text-error: #{$text-error};
+    --shadow: #{$shadow};
+    --shadow-lg: #{$shadow-lg};
+}
+
+// Global Reset and Base Styles
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    background: $background;
+    color: $foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+// Global utility classes
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+}
+
+.grid {
+    display: grid;
+    gap: $spacing-md;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@include mobile {
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.gap-sm {
+    gap: $spacing-sm;
+}
+
+.gap-md {
+    gap: $spacing-md;
+}
+
+.gap-lg {
+    gap: $spacing-lg;
+}
+
+.p-sm {
+    padding: $spacing-sm;
+}
+
+.p-md {
+    padding: $spacing-md;
+}
+
+.p-lg {
+    padding: $spacing-lg;
+}
+
+.m-sm {
+    margin: $spacing-sm;
+}
+
+.m-md {
+    margin: $spacing-md;
+}
+
+.m-lg {
+    margin: $spacing-lg;
+}
+
+.text-sm {
+    font-size: $text-sm;
+}
+
+.text-base {
+    font-size: $text-base;
+}
+
+.text-lg {
+    font-size: $text-lg;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.rounded {
+    border-radius: $radius-md;
+}
+
+.rounded-lg {
+    border-radius: $radius-lg;
+}
+
+.shadow {
+box-shadow: $shadow;
+}
+
+.shadow-lg {
+    box-shadow: $shadow-lg;
+}
+
+.border {
+    border: 1px solid $border;
+}
+
+.bg-white {
+    background-color: $background;
+}
+
+.text-gray-700 {
+    color: $text-secondary;
+}
+
+.text-gray-900 {
+    color: $text-primary;
+}
+
+.text-red-600 {
+    color: $text-error;
+}
+
+.w-4{
+    width: 1rem;
+}
+
+.h-4{
+    height: 1rem;
+}
+
+.w-6{
+    width: 1.5rem;
+}
+
+.h-6{
+    height: 1.5rem;
+}
+p{
+    &.text-blue {
+        color: $primary;
+      }
+      
+      &.text-green {
+        color: #059669;
+      }
+      
+      &.text-red {
+        color: $text-error;
+      }
+      
+      &.text-purple {
+        color: #7c3aed;
+      }
+}
+
+// Screen reader only utility class
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

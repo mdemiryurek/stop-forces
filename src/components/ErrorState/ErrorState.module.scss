@@ -1,0 +1,38 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.error-container {
+  @include flex-center;
+  min-height: 50vh;
+  padding: $spacing-2xl;
+}
+
+.error-content {
+  @include flex-center;
+  flex-direction: column;
+  gap: $spacing-lg;
+  text-align: center;
+  max-width: 500px;
+}
+
+.error-title {
+  color: $text-error;
+  font-size: $text-xl;
+  font-weight: 600;
+  margin: 0;
+  
+  @include mobile {
+    font-size: $text-lg;
+  }
+}
+
+.error-content p {
+  color: $text-secondary;
+  font-size: $text-base;
+  margin: 0;
+  line-height: 1.5;
+  
+  @include mobile {
+    font-size: $text-sm;
+  }
+}

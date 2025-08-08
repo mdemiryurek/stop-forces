@@ -1,0 +1,25 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  
+  .select-label {
+    display: block;
+    font-size: $text-sm;
+    font-weight: 500;
+    color: $text-primary;
+  }
+  
+  .select-field {
+    @include input-base;
+    height: 100px;
+    
+    option {
+      background-color: $background;
+      color: $text-primary;
+    }
+  }
+} 

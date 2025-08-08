@@ -1,0 +1,37 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.filter-content {
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .filter-section {
+    margin-bottom: $spacing-lg;
+    
+    h4 {
+      font-size: $text-base;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: $spacing-sm;
+    }
+  }
+  
+  .filter-actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-md;
+    border-top: 1px solid $border;
+    
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+}
