@@ -13,9 +13,9 @@ export const generateDateRange = async (): Promise<string[]> => {
       return [];
     }
     
-    const last12Months = availableDates.dates.slice(0, 12);
+    const last6Months = availableDates.dates.slice(0, 6);
     
-    return last12Months;
+    return last6Months;
   } catch (error) {
     console.error('Error fetching available dates:', error);
     return [];
@@ -34,6 +34,10 @@ export const fetchStopSearchData = async (
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+      next: { 
+        revalidate: 3600, // Cache for 1 hour
+        tags: [`stops-force-${date}-${FORCE}`] // Cache tag for invalidation
+      }
     });
 
     if (!response.ok) {
@@ -120,6 +124,10 @@ export const fetchAvailableDates = async (): Promise<AvailableDatesResponse | nu
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
+      next: { 
+        revalidate: 3600, // Cache for 1 hour
+        tags: [`available-dates`] // Cache tag for invalidation
+      }
     });
 
     if (!response.ok) {
