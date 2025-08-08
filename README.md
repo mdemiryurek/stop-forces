@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/mdemiryurek/stop-forces.git
    cd stop-forces
    ```
 
